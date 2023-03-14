@@ -1,23 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-void lap(string s, int n, string t){
-if(n==0) {
-    cout<<t<<endl;
-    return;
+void dequy(int n, string s, int m){
+    if(m>1){
+ for(int i=n-1; i>=0; i--){
+    if(i==0) swap(s[n-1],s[n-2]);
+    else swap(s[i],s[i-1]);
+    cout<<s<<endl;
+    m--;
+    if(m==1) break;
+ }
+ for(int i=0; i<=n-1; i++){
+    if(i==n-1) swap(s[0],s[1]);
+    else swap(s[i],s[i+1]);
+    cout<<s<<endl;
+    m--;
+    if(m==1) break;
+ }
+    dequy(n, s, m);
+    }
 }
-for(int i=0; i<n; i++){
-    string t_new = t+s[i];
-    string s_new = s.substr(0,i)+s.substr(i+1);
-    lap(s_new, n-1, t_new);
+int giaithua(int n){
+    int t=1;
+for(int i=1; i<=n; i++)
+    t*=i;
+    return t;
 }
+int main(){
+    int n;
+    cin>>n;
+    int m= giaithua(n);
+    string s="";
+    for(int i=1; i<=n; i++) s+=to_string(i);
+    cout<<s<<endl;
+    dequy(n, s, m);
+return 0;
 }
 
-int main(){
-    int m;
-    cin>>m;
-    string s="";
-    for(int i=1; i<=m; i++) s+=to_string(i);
-    int n=s.length();
-    lap(s, n, "");
-    return 0;
-}
